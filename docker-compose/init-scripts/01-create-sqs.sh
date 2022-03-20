@@ -58,16 +58,3 @@ echo "########### Get S3 bucket notification configurations ###########"
 aws --endpoint-url=http://localhost:4566 s3api get-bucket-notification-configuration\
     --bucket $BUCKET_NAME
 
-
-echo "########### Command to upload file to a bucket ###########"
-echo "aws --endpoint-url=http://localhost:4566 s3api put-object --bucket tutorial-bucket --key README.md --body README.md"
-
-echo "########### Command to receive upload event message ###########"
-echo "aws --endpoint-url=http://localhost:4566 sqs receive-message --queue-url=http://localhost:4566/000000000000/upload-file-event-sqs"
-
-echo "########### Command to delete file from a bucket ###########"
-echo "aws --endpoint-url=http://localhost:4566 s3api delete-object --bucket tutorial-bucket --key README.md"
-
-echo "########### Command to receive delete event message ###########"
-echo "aws --endpoint-url=http://localhost:4566 sqs receive-message --queue-url=http://localhost:4566/000000000000/delete-file-event-sqs"
-
