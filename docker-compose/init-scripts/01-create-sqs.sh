@@ -20,7 +20,6 @@ UPLOAD_FILE_EVENT_SQS_ARN=$(aws --endpoint-url=http://localstack:4566 sqs get-qu
                   --attribute-name QueueArn --queue-url=http://localhost:4566/000000000000/"$UPLOAD_FILE_EVENT_SQS"\
                   |  sed 's/"QueueArn"/\n"QueueArn"/g' | grep '"QueueArn"' | awk -F '"QueueArn":' '{print $2}' | tr -d '"' | xargs)
 
-
 echo "########### Creating delete file event SQS ###########"
 aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name $DELETE_FILE_EVENT_SQS
 
@@ -28,7 +27,6 @@ echo "########### ARN for delete file event SQS ###########"
 DELETE_FILE_EVENT_SQS_ARN=$(aws --endpoint-url=http://localstack:4566 sqs get-queue-attributes\
                   --attribute-name QueueArn --queue-url=http://localhost:4566/000000000000/"$DELETE_FILE_EVENT_SQS"\
                   |  sed 's/"QueueArn"/\n"QueueArn"/g' | grep '"QueueArn"' | awk -F '"QueueArn":' '{print $2}' | tr -d '"' | xargs)
-
 
 echo "########### Listing queues ###########"
 aws --endpoint-url=http://localhost:4566 sqs list-queues
@@ -40,6 +38,7 @@ aws --endpoint-url=http://localhost:4566 s3api create-bucket\
 echo "########### List S3 bucket ###########"
 aws --endpoint-url=http://localhost:4566 s3api list-buckets
 
+echo "########### Set S3 bucket notification configurations ###########"
 aws --endpoint-url=http://localhost:4566 s3api put-bucket-notification-configuration\
     --bucket $BUCKET_NAME\
     --notification-configuration  '{
@@ -55,10 +54,9 @@ aws --endpoint-url=http://localhost:4566 s3api put-bucket-notification-configura
                                        ]
                                      }'
 
-
+echo "########### Get S3 bucket notification configurations ###########"
 aws --endpoint-url=http://localhost:4566 s3api get-bucket-notification-configuration\
     --bucket $BUCKET_NAME
-
 
 
 echo "########### Command to upload file to a bucket ###########"
