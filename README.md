@@ -1,9 +1,9 @@
 
 <p align="center">
-  <img width="460" height="300" src="image-url.png">
+  <img width="460" height="300" src="https://miro.medium.com/max/700/1*5OyvJ_ObXznA2H9JNfnVCA.png">
 </p>
 
-<h1 align="center"><a href="blog-url">blog-name
+<h1 align="center"><a href="https://faun.pub/enable-aws-s3-bucket-events-notification-publishing-to-sqs-locally-using-localstack-45f369f74399">Enable AWS S3 bucket events notification publishing to SQS locally using Localstack
 </a></h1>
 
 
