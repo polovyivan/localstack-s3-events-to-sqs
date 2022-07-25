@@ -1,8 +1,11 @@
 #!/bin/bash
+echo "########### Setting region as env variable ##########"
+export AWS_REGION=sa-east-1
+
 echo "########### Setting up localstack profile ###########"
 aws configure set aws_access_key_id access_key --profile=localstack
 aws configure set aws_secret_access_key secret_key --profile=localstack
-aws configure set region sa-east-1 --profile=localstack
+aws configure set region $AWS_REGION --profile=localstack
 
 echo "########### Setting default profile ###########"
 export AWS_DEFAULT_PROFILE=localstack
@@ -33,7 +36,8 @@ aws --endpoint-url=http://localhost:4566 sqs list-queues
 
 echo "########### Create S3 bucket ###########"
 aws --endpoint-url=http://localhost:4566 s3api create-bucket\
-    --bucket $BUCKET_NAME
+    --bucket $BUCKET_NAME --region $AWS_REGION\
+    --create-bucket-configuration LocationConstraint=$AWS_REGION
 
 echo "########### List S3 bucket ###########"
 aws --endpoint-url=http://localhost:4566 s3api list-buckets
